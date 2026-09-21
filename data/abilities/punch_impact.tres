@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/effects/combat/slashes/punch_impact.png" id="2"]
+[resource]
+script = ExtResource("1")
+ability_id = &"punch_impact"
+display_name = "Impact Punch"
+effect_texture = ExtResource("2")
+frame_count = 5
+frame_size = Vector2i(48, 32)
+damage = 15
+range = 44.0
+arc_degrees = 70.0
+cooldown = 0.62
+effect_distance = 25.0
+

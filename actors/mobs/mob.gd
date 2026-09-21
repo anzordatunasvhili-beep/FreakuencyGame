@@ -12,6 +12,7 @@ signal died(mob: Mob)
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var wander_timer: Timer = $WanderTimer
+@onready var health_bar: MobHealthBar = $HealthBar
 
 var health := 1
 var _home_position := Vector2.ZERO
@@ -35,6 +36,8 @@ func _ready() -> void:
 		return
 
 	health = definition.max_health
+	health_bar.setup(definition.display_name, health, definition.max_health)
+	health_bar.visible = definition.hostile_to_player
 	_home_position = global_position
 	_rng.seed = int(global_position.x * 92821.0) ^ int(global_position.y * 68917.0) ^ definition.actor_id.hash()
 	sprite.region_enabled = true
@@ -77,6 +80,7 @@ func take_damage(amount: int) -> void:
 	if amount <= 0 or health <= 0:
 		return
 	health = maxi(0, health - amount)
+	health_bar.set_health(health, definition.max_health)
 	health_changed.emit(health, definition.max_health)
 	if health == 0:
 		died.emit(self)

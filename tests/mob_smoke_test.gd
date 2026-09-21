@@ -23,6 +23,15 @@ func _run() -> void:
 		push_error("Mob smoke test found incorrect mob distribution: %s" % counts)
 		quit(1)
 		return
+	for spawned_mob: Mob in mobs:
+		if spawned_mob.health_bar == null or spawned_mob.health_bar.bar.value != spawned_mob.health:
+			push_error("Mob smoke test: a mob health bar was not initialized correctly.")
+			quit(1)
+			return
+		if spawned_mob.health_bar.visible != spawned_mob.definition.hostile_to_player:
+			push_error("Mob smoke test: health bar visibility does not match monster hostility.")
+			quit(1)
+			return
 
 	var mob: Mob = mobs[0]
 	var start := mob.global_position
@@ -74,6 +83,28 @@ func _run() -> void:
 		quit(1)
 		return
 
+	var ability_controller := player.get_node("AbilityController") as AbilityController
+	if ability_controller == null or ability_controller.abilities.size() != 5:
+		push_error("Mob smoke test: player attack loadout did not initialize five VFX abilities.")
+		quit(1)
+		return
+	orc.global_position = player.global_position + Vector2(30, 0)
+	var health_before_ability := orc.health
+	ability_controller.select(0)
+	if not ability_controller.try_cast(player.global_position, Vector2.RIGHT):
+		push_error("Mob smoke test: VFX ability could not be cast.")
+		quit(1)
+		return
+	await process_frame
+	if orc.health >= health_before_ability or orc.health_bar.bar.value != orc.health:
+		push_error("Mob smoke test: VFX ability did not damage the orc or update its health bar.")
+		quit(1)
+		return
+	if ability_controller.try_cast(player.global_position, Vector2.RIGHT):
+		push_error("Mob smoke test: ability cooldown did not prevent an immediate second cast.")
+		quit(1)
+		return
+
 	var death_test_orc: Mob = null
 	for spawned_mob: Mob in mobs:
 		if spawned_mob.definition.actor_id == &"orc_3":
@@ -87,5 +118,5 @@ func _run() -> void:
 		quit(1)
 		return
 
-	print("Mob smoke test passed: cats stay passive; orcs spawn, chase, attack, damage, react, and die.")
+	print("Mob smoke test passed: mobs, hostile combat, VFX abilities, cooldowns, and health bars work.")
 	quit(0)

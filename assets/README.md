@@ -15,3 +15,6 @@ Keep source art grouped by its gameplay role. Godot `.import` files stay beside 
 - `minigames/*`: art that belongs only to fishing, hunting, dungeons, or mazes
 
 Use lowercase folder names and descriptive filenames. Put reusable art in the shared gameplay category instead of duplicating it inside a scene or minigame folder.
+
+Combat VFX are configured through `AbilityDefinition` resources in `data/abilities`.
+Adding another attack normally requires only its sprite strip and a new `.tres` definition.

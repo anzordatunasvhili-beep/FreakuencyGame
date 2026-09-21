@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://actors/mobs/mob.gd" id="1_mob"]
+[ext_resource type="PackedScene" path="res://scenes/ui/mob_health_bar.tscn" id="2_health"]
 
 [node name="Mob" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -23,3 +24,5 @@ centered = true
 
 [node name="WanderTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HealthBar" parent="." instance=ExtResource("2_health")]

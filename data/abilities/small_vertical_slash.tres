@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/effects/combat/slashes/vertical_slash_small.png" id="2"]
+[resource]
+script = ExtResource("1")
+ability_id = &"small_vertical_slash"
+display_name = "Quick Slash"
+effect_texture = ExtResource("2")
+frame_count = 4
+frame_size = Vector2i(32, 48)
+damage = 8
+range = 52.0
+cooldown = 0.32
+effect_distance = 24.0
+

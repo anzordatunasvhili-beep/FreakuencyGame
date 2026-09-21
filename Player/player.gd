@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var agent     : NavigationAgent2D
 @export var anim_tree : AnimationTree
 @export var speed     : float = 100.0
+@export var ability_controller: AbilityController
 
 var can_move       := true
 var _state_machine
@@ -25,6 +26,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			_follow_mouse = event.pressed
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and ability_controller:
+			ability_controller.try_cast(global_position, get_global_mouse_position() - global_position)
+	for index in ability_controller.abilities.size() if ability_controller else 0:
+		if event.is_action_pressed("hotbar_%d" % (index + 1)):
+			ability_controller.select(index)
 
 var _last_direction := Vector2.DOWN  # default facing down
 
