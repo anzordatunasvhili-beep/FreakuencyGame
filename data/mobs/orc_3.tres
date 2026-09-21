@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="MobDefinition" load_steps=10 format=3]
+[ext_resource type="Script" path="res://actors/mobs/mob_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/walk.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/idle.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/run.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/attack.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/walk_attack.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/run_attack.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/hurt.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/orcs/orc3/death.png" id="9"]
+[resource]
+script = ExtResource("1")
+actor_id = &"orc_3"
+display_name = "Orc Brute"
+sprite_sheet = ExtResource("2")
+animation_fps = 8.0
+sprite_scale = 1.0
+sprite_offset = Vector2(0, -20)
+max_health = 70
+move_speed = 27.0
+wander_radius = 128.0
+collision_radius = 12.0
+hostile_to_player = true
+aggro_radius = 280.0
+chase_leash = 460.0
+attack_range = 32.0
+attack_damage = 12
+attack_cooldown = 1.7
+idle_sheet = ExtResource("3")
+walk_sheet = ExtResource("2")
+run_sheet = ExtResource("4")
+attack_sheet = ExtResource("5")
+walk_attack_sheet = ExtResource("6")
+run_attack_sheet = ExtResource("7")
+hurt_sheet = ExtResource("8")
+death_sheet = ExtResource("9")
+frame_size = Vector2i(64, 64)
+down_row = 0
+up_row = 1
+left_row = 2
+right_row = 3
+use_mirrored_side = false

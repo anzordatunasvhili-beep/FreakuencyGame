@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MobDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://actors/mobs/mob_definition.gd" id="1_definition"]
+[ext_resource type="Texture2D" path="res://assets/characters/mobs/cat/cat_walk.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_definition")
+actor_id = &"cat"
+display_name = "Cat"
+sprite_sheet = ExtResource("2_texture")
+animation_columns = 4
+animation_rows = 4
+animation_fps = 6.0
+sprite_scale = 0.12
+sprite_offset = Vector2(0, -14)
+max_health = 15
+move_speed = 28.0
+wander_radius = 96.0
+min_idle_time = 1.5
+max_idle_time = 4.0
+collision_radius = 9.0
+down_row = 0
+side_row = 1
+up_row = 3
+side_art_faces_right = true

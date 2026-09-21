@@ -1,0 +1,706 @@
+[gd_scene load_steps=18 format=3 uid="uid://pxkp612cs2rd"]
+
+[ext_resource type="Script" uid="uid://047bko5kr88a" path="res://ui/hud.gd" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://cubggp26okgj2" path="res://assets/ui/hud/backgrounds/HB_BG2.png" id="2_mphia"]
+[ext_resource type="Texture2D" uid="uid://bqo5uxn4ksal5" path="res://assets/ui/hud/slots/HB_Base1.png" id="2_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://cqrc0t1pfachx" path="res://assets/ui/hud/backgrounds/HB_BG1.png" id="3_0m4u7"]
+[ext_resource type="Texture2D" uid="uid://b7m4qh5so88x2" path="res://assets/ui/hud/slots/Pressed.png" id="3_047uy"]
+[ext_resource type="Texture2D" uid="uid://bywwvtoxem4t3" path="res://assets/ui/hud/slots/Hover.png" id="4_5pdws"]
+[ext_resource type="Texture2D" uid="uid://h21gdb4ixijg" path="res://assets/ui/hud/bars/HPBar.png" id="4_apjy4"]
+[ext_resource type="Texture2D" uid="uid://bfime3enh3np5" path="res://assets/ui/hud/bars/HPBarFill.png" id="5_5n1hp"]
+[ext_resource type="Texture2D" uid="uid://b2aeufxom84ih" path="res://assets/ui/hud/slots/Focus.png" id="5_hd3ao"]
+[ext_resource type="Texture2D" uid="uid://bkoytmcmxa238" path="res://assets/ui/hud/bars/Heart.png" id="6_qkknv"]
+[ext_resource type="Texture2D" uid="uid://d0etkn0r3vl6l" path="res://assets/ui/hud/bars/ManaBar.png" id="7_uxdf7"]
+[ext_resource type="Texture2D" uid="uid://cia877c45vtjh" path="res://assets/ui/hud/bars/ManaBarFill.png" id="8_5357l"]
+[ext_resource type="Texture2D" uid="uid://b20aqai2sqdya" path="res://assets/ui/hud/bars/Magic.png" id="9_iypfu"]
+[ext_resource type="Texture2D" uid="uid://cqt8kcrq0d62o" path="res://assets/ui/shared/digits/N0.png" id="10_eld54"]
+[ext_resource type="Texture2D" uid="uid://dg6iluudck3qr" path="res://assets/ui/hud/bars/XPBar.png" id="15_qpprf"]
+[ext_resource type="Texture2D" uid="uid://cmo0a1821u04m" path="res://assets/ui/hud/bars/XPBarFill.png" id="16_3xg78"]
+[ext_resource type="Script" path="res://ui/hotbar.gd" id="17_hotbar"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 10
+visible = false
+script = ExtResource("1_ahhtf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -100.0
+offset_right = 512.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GoldLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 263.0
+offset_top = -98.0
+offset_right = 363.0
+offset_bottom = -50.0
+
+[node name="GemsLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = -98.0
+offset_right = 468.0
+offset_bottom = -50.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+texture_filter = 1
+custom_minimum_size = Vector2(628, 84)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -78.0
+offset_right = 314.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mphia")
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+texture_filter = 1
+custom_minimum_size = Vector2(628, 84)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -42.0
+offset_right = 314.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0m4u7")
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 208.0
+offset_top = -60.0
+offset_right = 468.0
+offset_bottom = 4.0
+texture_under = ExtResource("4_apjy4")
+texture_progress = ExtResource("5_5n1hp")
+
+[node name="TextureRect" type="TextureRect" parent="Control/HealthBar"]
+texture_filter = 1
+layout_mode = 0
+offset_top = -38.0
+offset_right = 48.0
+offset_bottom = 10.0
+texture = ExtResource("6_qkknv")
+
+[node name="ManaBar" type="TextureProgressBar" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 556.0
+offset_top = -60.0
+offset_right = 816.0
+offset_bottom = 4.0
+texture_under = ExtResource("7_uxdf7")
+texture_progress = ExtResource("8_5357l")
+
+[node name="TextureRect" type="TextureRect" parent="Control/ManaBar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 212.0
+offset_top = -38.0
+offset_right = 260.0
+offset_bottom = 10.0
+texture = ExtResource("9_iypfu")
+
+[node name="Hotbar" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -82.0
+offset_right = 304.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 4
+script = ExtResource("17_hotbar")
+
+[node name="B1" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B1"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B1"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B1"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B2" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B2"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B2"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B2"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B3" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B3"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B3"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B3"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B4" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B4"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B4"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B4"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B4"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B5" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B5"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B5"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B5"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B5"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B6" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B6"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B6"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B6"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B6"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B7" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B7"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B7"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B7"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B7"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B8" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B8"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B8"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B8"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B8"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B9" type="TextureButton" parent="Control/Hotbar"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_uo2fv")
+texture_pressed = ExtResource("3_047uy")
+texture_hover = ExtResource("4_5pdws")
+texture_focused = ExtResource("5_hd3ao")
+
+[node name="Item" type="Label" parent="Control/Hotbar/B9"]
+layout_mode = 0
+
+[node name="Count" type="Label" parent="Control/Hotbar/B9"]
+layout_mode = 0
+
+[node name="N" type="TextureRect" parent="Control/Hotbar/B9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 27.0
+grow_horizontal = 0
+texture = ExtResource("10_eld54")
+
+[node name="Count2" type="TextureRect" parent="Control/Hotbar/B9"]
+modulate = Color(0.75686276, 0.4509804, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_eld54")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/Hotbar/B9"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = -28.0
+offset_right = 816.0
+offset_bottom = 36.0
+max_value = 190.0
+texture_under = ExtResource("15_qpprf")
+texture_progress = ExtResource("16_3xg78")

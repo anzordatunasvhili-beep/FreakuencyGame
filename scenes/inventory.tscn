@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkd7c8qf8216c"]
+
+[ext_resource type="Script" uid="uid://dfg0bku2wwf0n" path="res://ui/inventory.gd" id="1_qw0r6"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qw0r6")
+
+[node name="Blueprint" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Item" type="Label" parent="Blueprint"]
+layout_mode = 2
+
+[node name="Count" type="VBoxContainer" parent="Blueprint"]
+layout_mode = 2
+
+[node name="D1" type="Label" parent="Blueprint/Count"]
+layout_mode = 2
+
+[node name="D2" type="Label" parent="Blueprint/Count"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+columns = 5

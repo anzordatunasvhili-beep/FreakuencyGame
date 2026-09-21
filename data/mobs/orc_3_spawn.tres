@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MobSpawnEntry" load_steps=3 format=3]
+[ext_resource type="Script" path="res://actors/mobs/mob_spawn_entry.gd" id="1"]
+[ext_resource type="Resource" path="res://data/mobs/orc_3.tres" id="2"]
+[resource]
+script = ExtResource("1")
+definition = ExtResource("2")
+count = 2
+minimum_spawn_distance_cells = 20
+maximum_spawn_distance_cells = 44

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="NpcDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://actors/npcs/npc_definition.gd" id="1_definition"]
+[ext_resource type="Texture2D" path="res://assets/characters/player/animpack.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_definition")
+actor_id = &"first_villager"
+display_name = "Villager"
+sprite_sheet = ExtResource("2_texture")
+animation_columns = 8
+animation_rows = 3
+default_frame = 4
+sprite_scale = 1.0
+sprite_offset = Vector2(0, 0)
+interaction_prompt = "Press E to talk"
+greeting = "Welcome, traveler. This village is small, but the world is growing."
+dialogue_topics = {
+"fish": "The nearby waters will become a fishing area.",
+"hunt": "Hunters say creatures roam beyond the village.",
+"quest": "I will have proper quests once the quest system is ready."
+}

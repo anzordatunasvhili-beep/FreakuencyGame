@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://lktkquwc0kmk"]
+
+[ext_resource type="Script" uid="uid://pu043bckgx52" path="res://npc/npc.gd" id="1_nh2m4"]
+[ext_resource type="Texture2D" uid="uid://dlw5v7gm1lwhg" path="res://assets/characters/player/animpack.png" id="2_abqhh"]
+[ext_resource type="Resource" path="res://data/npcs/villager.tres" id="3_definition"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abqhh"]
+radius = 80.0
+
+[node name="NPC" type="Area2D"]
+script = ExtResource("1_nh2m4")
+definition = ExtResource("3_definition")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_abqhh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_abqhh")
+hframes = 8
+vframes = 3
+frame = 4
+
+[node name="HintLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(120, 30)
+offset_left = -60.0
+offset_top = -80.0
+offset_right = 60.0
+offset_bottom = -50.0
+text = "Press E to talk"

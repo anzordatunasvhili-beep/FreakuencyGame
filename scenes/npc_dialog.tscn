@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4hkciov0ljpy"]
+
+[ext_resource type="Script" uid="uid://dlsr1qkcnryhg" path="res://npc/npc_dialog.gd" id="1_l38uh"]
+[ext_resource type="Texture2D" uid="uid://cubggp26okgj2" path="res://assets/ui/hud/backgrounds/HB_BG2.png" id="2_5m3vx"]
+[ext_resource type="Texture2D" uid="uid://cqrc0t1pfachx" path="res://assets/ui/hud/backgrounds/HB_BG1.png" id="3_r28e6"]
+
+[node name="NPCDialog" type="CanvasLayer"]
+script = ExtResource("1_l38uh")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -220.0
+offset_right = 314.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="middle" type="TextureRect" parent="Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -170.0
+offset_right = 314.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5m3vx")
+
+[node name="Bottom" type="TextureRect" parent="Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -314.0
+offset_top = -84.0
+offset_right = 314.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_r28e6")
+
+[node name="Top" type="TextureRect" parent="Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -314.0
+offset_right = 314.0
+offset_bottom = 84.0
+grow_horizontal = 2
+texture = ExtResource("2_5m3vx")
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="Panel/VBox"]
+layout_direction = 3
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Panel/VBox/TopBar"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panel/VBox/TopBar"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MessagesVBox" type="VBoxContainer" parent="Panel/VBox/ScrollContainer"]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+
+[node name="RewardButton" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+
+[node name="Bottom" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="InputField" type="LineEdit" parent="Panel/VBox/Bottom"]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+
+[node name="SendButton" type="Button" parent="Panel/VBox/Bottom"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
