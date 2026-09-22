@@ -18,8 +18,11 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Item" type="Label" parent="Blueprint"]
+[node name="Item" type="TextureRect" parent="Blueprint"]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Count" type="VBoxContainer" parent="Blueprint"]
 layout_mode = 2
@@ -33,7 +36,7 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 0.62
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -41,3 +44,46 @@ grow_vertical = 2
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
 columns = 5
+
+[node name="PowerPanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -390.0
+offset_top = 36.0
+offset_right = -24.0
+offset_bottom = -36.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="PowerPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Power Loadout"
+
+[node name="Help" type="Label" parent="PowerPanel"]
+layout_mode = 2
+text = "Select Q or R, then choose a power."
+
+[node name="Equipped" type="HBoxContainer" parent="PowerPanel"]
+layout_mode = 2
+
+[node name="QSlot" type="Button" parent="PowerPanel/Equipped"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Q Slot"
+
+[node name="RSlot" type="Button" parent="PowerPanel/Equipped"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R Slot"
+
+[node name="Available" type="Label" parent="PowerPanel"]
+layout_mode = 2
+text = "Available Powers"
+
+[node name="PowerList" type="VBoxContainer" parent="PowerPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6

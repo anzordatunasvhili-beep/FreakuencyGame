@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://combat/power_effect.gd" id="1"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/void_bloom.gdshader" id="2"]
+[node name="VoidBloom" type="Node2D"]
+script = ExtResource("1")
+effect_shader = ExtResource("2")
+primary_color = Color(0.68, 0.12, 1, 1)
+secondary_color = Color(0.05, 0.01, 0.18, 1)
+particle_amount = 96
+duration = 0.9
+particle_speed = 68.0
+visual_size = 116.0

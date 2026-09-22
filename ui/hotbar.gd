@@ -25,6 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	for i in SLOT_COUNT:
 		if event.is_action_pressed("hotbar_%d" % (i + 1)):
 			_select_slot(i)
+			_use_slot(i)
 
 func _select_slot(index: int) -> void:
 	_selected = index
@@ -50,7 +51,7 @@ func _refresh() -> void:
 		if _slots[i] == null:
 			continue
 		var item_id = GameState.hotbar[i] if i < GameState.hotbar.size() else null
-		var item_node = _slots[i].get_node_or_null("Item")
+		var item_node = _slots[i].get_node_or_null("TextureRect")
 		var count_node = _slots[i].get_node_or_null("Count")
 
 		if item_id == null:
@@ -78,9 +79,17 @@ func _set_item_display(item_node: Node, entry: Dictionary) -> void:
 	if item_node is Label:
 		item_node.text = entry.get("emoji", "")
 	elif item_node is TextureRect:
-		item_node.texture = entry.get("texture")
+		var icon_path: String = entry.get("icon_path", "")
+		item_node.texture = load(icon_path) if not icon_path.is_empty() else entry.get("texture")
 
 func get_selected_item_id():
 	if _selected < GameState.hotbar.size():
 		return GameState.hotbar[_selected]
 	return null
+
+func _use_slot(index: int) -> void:
+	if index < 0 or index >= GameState.hotbar.size():
+		return
+	var item_id = GameState.hotbar[index]
+	if item_id != null:
+		ItemDatabase.use_item(StringName(item_id))

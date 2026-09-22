@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/weapons/weapon_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/weapons/swords/ranitaya/outlined/sword_12.png" id="2"]
+[resource]
+script = ExtResource("1")
+weapon_id = &"ranitaya_sword_12"
+display_name = "Kingsguard"
+description = "A commanding blade with excellent reach."
+rarity = 2
+value = 320
+world_texture = ExtResource("2")
+inventory_texture = ExtResource("2")
+orbit_radius = 21.0
+damage_bonus = 10
+range_bonus = 7.0
+

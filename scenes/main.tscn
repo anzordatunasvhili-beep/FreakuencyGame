@@ -355,6 +355,10 @@ tile_set = SubResource("TileSet_85g3d")
 collision_enabled = false
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="Node2D" unique_id=1516968146]
+z_index = 1
+tile_set = SubResource("TileSet_85g3d")
+collision_enabled = false
+navigation_enabled = false
 
 [node name="Player" parent="." unique_id=1167077407 instance=ExtResource("2_tefeu")]
 position = Vector2(552, 390)

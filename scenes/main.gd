@@ -5,16 +5,20 @@ extends Node2D
 @onready var player = $Player
 @onready var npc = $NPC
 @onready var ground: TileMapLayer = $Node2D/TileMapLayer
+@onready var details: TileMapLayer = $Node2D/TileMapLayer2
 
 @export var world_size := Vector2i(96, 96)
 
 func _ready() -> void:
 	var world_seed := SeedManager.get_main_world_seed()
-	ProceduralWorld.generate_overworld(ground, world_seed, world_size)
+	ProceduralWorld.generate_overworld(ground, details, world_seed, world_size)
 	await get_tree().process_frame
 	var local_ok = SaveManager.load_local(0)
 	if not local_ok:
 		print("Main: fresh start, no save found")
+	ItemDatabase.ensure_starter_items()
+	if player and player.ability_controller:
+		player.ability_controller.apply_saved_power_loadout(GameState.equipped_power_ids)
 	if GameState.main_world_seed != world_seed:
 		# Positions from the former static map or another seed are not safe here.
 		GameState.last_position = Vector2.ZERO

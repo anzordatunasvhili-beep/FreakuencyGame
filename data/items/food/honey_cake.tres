@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/honey_cake.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_honey_cake"
+display_name = "Royal Honey Cake"
+description = "Layered honey cake that restores energy and empowers attacks."
+icon = ExtResource("2")
+rarity = 1
+tags = Array[StringName]([&"food", &"dessert", &"baked", &"honey"])
+max_stack = 10
+weight = 0.7
+buy_price = 55
+sell_price = 24
+health_restore = 20
+mana_restore = 16
+stamina_restore = 18
+hunger_restore = 30
+buff_type = 2
+buff_value = 5.0
+buff_duration = 75.0
+consume_time = 0.9

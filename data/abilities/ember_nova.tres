@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/effects/ember_nova.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+ability_id = &"ember_nova"
+display_name = "Ember Nova"
+effect_scene = ExtResource("2")
+damage = 16
+range = 76.0
+arc_degrees = 360.0
+cooldown = 2.4
+effect_distance = 0.0
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://sg24m0bdl74d"]
+[gd_scene load_steps=57 format=3 uid="uid://sg24m0bdl74d"]
 
 [ext_resource type="Script" uid="uid://dgljayp87um4i" path="res://Player/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://dlw5v7gm1lwhg" path="res://assets/characters/player/animpack.png" id="2_g2els"]
@@ -8,6 +8,14 @@
 [ext_resource type="Resource" path="res://data/abilities/punch_impact.tres" id="6_attack"]
 [ext_resource type="Resource" path="res://data/abilities/vertical_slash.tres" id="7_attack"]
 [ext_resource type="Resource" path="res://data/abilities/big_vertical_slash.tres" id="8_attack"]
+[ext_resource type="Script" path="res://items/weapons/weapon_controller.gd" id="9_weapon_controller"]
+[ext_resource type="Resource" path="res://data/weapons/swords/ranitaya_sword_01.tres" id="10_weapon"]
+[ext_resource type="Resource" path="res://data/abilities/ember_nova.tres" id="11_power"]
+[ext_resource type="Resource" path="res://data/abilities/arc_storm.tres" id="12_power"]
+[ext_resource type="Resource" path="res://data/abilities/void_bloom.tres" id="13_power"]
+[ext_resource type="Resource" path="res://data/abilities/glacial_halo.tres" id="14_power"]
+[ext_resource type="Resource" path="res://data/abilities/solar_spear.tres" id="15_power"]
+[ext_resource type="Resource" path="res://data/abilities/spirit_pulse.tres" id="16_power"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
 radius = 9.0
@@ -425,13 +433,14 @@ _data = {
 &"walk_top_right": SubResource("Animation_32hag")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("agent", "anim_tree", "ability_controller")]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("agent", "anim_tree", "ability_controller", "weapon_controller")]
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_3vyb7")
 agent = NodePath("NavigationAgent2D")
 anim_tree = NodePath("AnimationTree")
 ability_controller = NodePath("AbilityController")
+weapon_controller = NodePath("WeaponOrbit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -467,3 +476,15 @@ frame = 4
 [node name="AbilityController" type="Node" parent="."]
 script = ExtResource("3_ability")
 abilities = Array[Resource]([ExtResource("4_attack"), ExtResource("5_attack"), ExtResource("6_attack"), ExtResource("7_attack"), ExtResource("8_attack")])
+power_library = Array[Resource]([ExtResource("11_power"), ExtResource("12_power"), ExtResource("13_power"), ExtResource("14_power"), ExtResource("15_power"), ExtResource("16_power")])
+equipped_powers = Array[Resource]([ExtResource("11_power"), ExtResource("12_power")])
+
+[node name="WeaponOrbit" type="Node2D" parent="." node_paths=PackedStringArray("ability_controller")]
+position = Vector2(0, -8)
+script = ExtResource("9_weapon_controller")
+starting_weapon = ExtResource("10_weapon")
+ability_controller = NodePath("../AbilityController")
+
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponOrbit"]
+texture_filter = 1
+centered = true

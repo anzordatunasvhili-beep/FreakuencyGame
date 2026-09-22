@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/weapons/weapon_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/weapons/swords/ranitaya/outlined/sword_1.png" id="2"]
+[resource]
+script = ExtResource("1")
+weapon_id = &"ranitaya_sword_01"
+display_name = "Wanderer's Blade"
+description = "A balanced starter sword."
+value = 40
+world_texture = ExtResource("2")
+inventory_texture = ExtResource("2")
+orbit_radius = 19.0
+damage_bonus = 2
+range_bonus = 2.0
+attack_speed_multiplier = 1.05
+

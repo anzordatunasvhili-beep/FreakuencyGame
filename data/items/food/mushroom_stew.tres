@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/mushroom_stew.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_mushroom_stew"
+display_name = "Creamy Mushroom Stew"
+description = "A dense woodland stew that improves defense."
+icon = ExtResource("2")
+rarity = 1
+tags = Array[StringName]([&"food", &"mushroom", &"cooked"])
+max_stack = 10
+weight = 0.95
+buy_price = 44
+sell_price = 19
+health_restore = 24
+mana_restore = 8
+stamina_restore = 12
+hunger_restore = 34
+buff_type = 3
+buff_value = 4.0
+buff_duration = 90.0
+consume_time = 1.0
+

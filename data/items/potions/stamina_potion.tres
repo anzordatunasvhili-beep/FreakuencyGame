@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PotionDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/potion_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/potions/stamina_potion.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"potion_stamina"
+display_name = "Verdant Stamina Potion"
+description = "A lively herbal mixture that immediately restores 50 stamina."
+icon = ExtResource("2")
+tags = Array[StringName]([&"potion", &"consumable", &"stamina"])
+max_stack = 15
+weight = 0.35
+buy_price = 40
+sell_price = 16
+stamina_restore = 50
+cooldown = 1.5
+consume_time = 0.25
+

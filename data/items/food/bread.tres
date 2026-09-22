@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/bread.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_bread"
+display_name = "Village Bread"
+description = "A filling loaf baked fresh in the village."
+icon = ExtResource("2")
+tags = Array[StringName]([&"food", &"baked", &"grain"])
+max_stack = 20
+weight = 0.45
+buy_price = 10
+sell_price = 4
+health_restore = 6
+stamina_restore = 5
+hunger_restore = 16
+consume_time = 0.55
+

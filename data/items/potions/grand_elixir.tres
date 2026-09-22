@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PotionDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/potion_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/potions/grand_elixir.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"potion_grand_elixir"
+display_name = "Grand Astral Elixir"
+description = "A rare elixir restoring body and spirit while empowering attacks."
+icon = ExtResource("2")
+rarity = 2
+tags = Array[StringName]([&"potion", &"consumable", &"elixir", &"magical"])
+max_stack = 5
+weight = 0.5
+buy_price = 180
+sell_price = 75
+level_requirement = 5
+health_restore = 75
+mana_restore = 60
+stamina_restore = 75
+buff_type = 2
+buff_value = 8.0
+buff_duration = 30.0
+cooldown = 5.0
+consume_time = 0.45

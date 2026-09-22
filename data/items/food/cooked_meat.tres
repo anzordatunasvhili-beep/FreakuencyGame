@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/cooked_meat.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_cooked_meat"
+display_name = "Seared Steak"
+description = "A hearty cut of seasoned meat that boosts attack power."
+icon = ExtResource("2")
+tags = Array[StringName]([&"food", &"meat", &"cooked"])
+max_stack = 15
+weight = 0.7
+buy_price = 28
+sell_price = 12
+health_restore = 18
+stamina_restore = 12
+hunger_restore = 28
+buff_type = 2
+buff_value = 3.0
+buff_duration = 60.0
+consume_time = 0.8
+

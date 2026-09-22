@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/chicken_leg.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_chicken_leg"
+display_name = "Roasted Drumstick"
+description = "Crispy outside, tender inside, and easy to carry."
+icon = ExtResource("2")
+tags = Array[StringName]([&"food", &"meat", &"cooked"])
+max_stack = 15
+weight = 0.55
+buy_price = 24
+sell_price = 10
+health_restore = 15
+stamina_restore = 10
+hunger_restore = 24
+consume_time = 0.7
+

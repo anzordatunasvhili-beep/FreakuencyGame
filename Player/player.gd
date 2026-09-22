@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var anim_tree : AnimationTree
 @export var speed     : float = 100.0
 @export var ability_controller: AbilityController
+@export var weapon_controller: WeaponController
 
 var can_move       := true
 var _state_machine
@@ -24,17 +25,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not can_move:
 		return
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
 			_follow_mouse = event.pressed
-		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and ability_controller:
-			ability_controller.try_cast(global_position, get_global_mouse_position() - global_position)
-	for index in ability_controller.abilities.size() if ability_controller else 0:
-		if event.is_action_pressed("hotbar_%d" % (index + 1)):
-			ability_controller.select(index)
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and ability_controller:
+			ability_controller.try_cast_attack(global_position, get_global_mouse_position() - global_position)
+	if ability_controller:
+		var aim_direction := get_global_mouse_position() - global_position
+		if event.is_action_pressed("power_1"):
+			ability_controller.try_cast_power(0, global_position, aim_direction)
+		elif event.is_action_pressed("power_2"):
+			ability_controller.try_cast_power(1, global_position, aim_direction)
 
 var _last_direction := Vector2.DOWN  # default facing down
 
 func _physics_process(delta: float) -> void:
+	if weapon_controller:
+		weapon_controller.set_aim_direction(get_global_mouse_position() - global_position)
 	if not can_move:
 		velocity = Vector2.ZERO
 		_apply_anim("Idle", _last_direction)
@@ -50,7 +56,8 @@ func _physics_process(delta: float) -> void:
 
 	var next      := agent.get_next_path_position()
 	var direction := (next - global_position).normalized()
-	velocity       = direction * speed
+	var food_speed_bonus := GameState.get_food_buff_total(GameState.FOOD_BUFF_SPEED)
+	velocity       = direction * speed * (1.0 + food_speed_bonus)
 	_last_direction = direction  # ← save it
 	move_and_slide()
 	_apply_anim("Run", direction)
@@ -69,4 +76,5 @@ func set_dialog_open(open: bool) -> void:
 		_apply_anim("Idle", Vector2.ZERO)
 
 func take_damage(amount: int) -> void:
-	GameState.apply_damage(amount)
+	var food_defense := GameState.get_food_buff_total(GameState.FOOD_BUFF_DEFENSE)
+	GameState.apply_damage(maxi(1, amount - roundi(food_defense)))

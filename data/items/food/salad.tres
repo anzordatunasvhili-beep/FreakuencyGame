@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/salad.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_salad"
+display_name = "Adventurer's Salad"
+description = "Fresh greens and tomatoes that make travel feel lighter."
+icon = ExtResource("2")
+tags = Array[StringName]([&"food", &"vegetable", &"fresh"])
+max_stack = 10
+weight = 0.65
+buy_price = 22
+sell_price = 9
+health_restore = 10
+stamina_restore = 14
+hunger_restore = 20
+buff_type = 4
+buff_value = 0.08
+buff_duration = 60.0
+consume_time = 0.75
+

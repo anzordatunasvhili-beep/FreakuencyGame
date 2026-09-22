@@ -18,3 +18,7 @@ Use lowercase folder names and descriptive filenames. Put reusable art in the sh
 
 Combat VFX are configured through `AbilityDefinition` resources in `data/abilities`.
 Adding another attack normally requires only its sprite strip and a new `.tres` definition.
+
+Weapon art is grouped by type and pack. Runtime weapon stats live in
+`data/weapons`; every `WeaponDefinition` also has an ability list ready for future
+weapon-specific attacks.

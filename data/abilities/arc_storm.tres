@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/effects/arc_storm.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+ability_id = &"arc_storm"
+display_name = "Arc Storm"
+effect_scene = ExtResource("2")
+damage = 22
+range = 110.0
+arc_degrees = 72.0
+cooldown = 3.1
+effect_distance = 48.0
+

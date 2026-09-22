@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/weapons/weapon_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/weapons/swords/ranitaya/outlined/sword_4.png" id="2"]
+[resource]
+script = ExtResource("1")
+weapon_id = &"ranitaya_sword_04"
+display_name = "Mercenary Sword"
+description = "Practical steel for long journeys."
+value = 85
+world_texture = ExtResource("2")
+inventory_texture = ExtResource("2")
+orbit_radius = 19.0
+damage_bonus = 4
+range_bonus = 3.0
+

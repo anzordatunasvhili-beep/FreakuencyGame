@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/apple.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_apple"
+display_name = "Bright Apple"
+description = "A crisp orchard apple. Small, cheap, and refreshing."
+icon = ExtResource("2")
+tags = Array[StringName]([&"food", &"fruit", &"raw"])
+max_stack = 30
+weight = 0.2
+buy_price = 6
+sell_price = 2
+health_restore = 3
+stamina_restore = 2
+hunger_restore = 8
+consume_time = 0.35
+

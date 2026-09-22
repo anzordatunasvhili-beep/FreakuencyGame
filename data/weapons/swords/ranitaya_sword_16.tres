@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/weapons/weapon_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/weapons/swords/ranitaya/outlined/sword_16.png" id="2"]
+[resource]
+script = ExtResource("1")
+weapon_id = &"ranitaya_sword_16"
+display_name = "Worldsplitter"
+description = "A legendary sword awaiting its unique ability."
+rarity = 4
+value = 1000
+world_texture = ExtResource("2")
+inventory_texture = ExtResource("2")
+orbit_radius = 22.0
+damage_bonus = 18
+damage_multiplier = 1.2
+range_bonus = 12.0
+attack_speed_multiplier = 1.15

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/effects/solar_spear.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+ability_id = &"solar_spear"
+display_name = "Solar Spear"
+effect_scene = ExtResource("2")
+damage = 42
+range = 142.0
+arc_degrees = 38.0
+cooldown = 4.2
+effect_distance = 62.0
+

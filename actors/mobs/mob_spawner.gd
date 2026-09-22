@@ -38,7 +38,7 @@ func _find_spawn_position(entry: MobSpawnEntry, rng: RandomNumberGenerator) -> V
 		)
 		var cell := Vector2i(roundi(cos(angle) * distance), roundi(sin(angle) * distance))
 		var atlas_coordinates := ground.get_cell_atlas_coords(cell)
-		if atlas_coordinates == Vector2i(-1, -1) or atlas_coordinates == ProceduralWorld.WATER_TILE:
+		if atlas_coordinates == Vector2i(-1, -1) or atlas_coordinates in ProceduralWorld.WATER_TILES:
 			continue
 		return ground.to_global(ground.map_to_local(cell))
 	return Vector2.INF

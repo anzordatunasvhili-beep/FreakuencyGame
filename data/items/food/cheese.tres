@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/cheese.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_cheese"
+display_name = "Golden Cheese"
+description = "Rich aged cheese that briefly hardens the resolve."
+icon = ExtResource("2")
+tags = Array[StringName]([&"food", &"dairy", &"prepared"])
+max_stack = 20
+weight = 0.35
+buy_price = 16
+sell_price = 6
+health_restore = 8
+stamina_restore = 6
+hunger_restore = 18
+buff_type = 3
+buff_value = 2.0
+buff_duration = 45.0
+consume_time = 0.55
+

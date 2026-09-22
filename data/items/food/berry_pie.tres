@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="FoodDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://items/consumables/food_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/consumables/food/berry_pie.png" id="2"]
+[resource]
+script = ExtResource("1")
+item_id = &"food_berry_pie"
+display_name = "Wild Berry Pie"
+description = "A sweet berry pie said to bring a little luck."
+icon = ExtResource("2")
+rarity = 1
+tags = Array[StringName]([&"food", &"dessert", &"baked"])
+max_stack = 10
+weight = 0.8
+buy_price = 38
+sell_price = 16
+health_restore = 16
+mana_restore = 10
+stamina_restore = 10
+hunger_restore = 26
+buff_type = 5
+buff_value = 0.05
+buff_duration = 90.0
+consume_time = 0.9
+
