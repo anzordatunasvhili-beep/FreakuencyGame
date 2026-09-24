@@ -1,6 +1,8 @@
 class_name AbilityController
 extends Node
 
+const ORIGINAL_POWER_IDS := [&"ember_nova", &"arc_storm", &"void_bloom", &"glacial_halo", &"solar_spear", &"spirit_pulse"]
+
 signal ability_selected(index: int, ability: AbilityDefinition)
 signal ability_cast(ability: AbilityDefinition)
 signal power_equipped(slot: int, ability: AbilityDefinition)
@@ -12,6 +14,7 @@ signal power_equipped(slot: int, ability: AbilityDefinition)
 
 var selected_index := 0
 var _cooldowns: Dictionary = {}
+var _cooldown_durations: Dictionary = {}
 var _weapon_damage_bonus := 0
 var _weapon_damage_multiplier := 1.0
 var _weapon_range_bonus := 0.0
@@ -45,6 +48,15 @@ func try_cast_index(index: int, origin: Vector2, aim_direction: Vector2) -> bool
 		return false
 	return _try_cast_ability(abilities[index], origin, aim_direction)
 
+func cooldown_remaining(ability: AbilityDefinition) -> float:
+	return float(_cooldowns.get(ability.ability_id, 0.0)) if ability else 0.0
+
+func cooldown_fraction(ability: AbilityDefinition) -> float:
+	if ability == null:
+		return 0.0
+	var duration := float(_cooldown_durations.get(ability.ability_id, ability.cooldown))
+	return clampf(cooldown_remaining(ability) / duration, 0.0, 1.0) if duration > 0.0 else 0.0
+
 func equip_power(slot: int, ability: AbilityDefinition) -> bool:
 	if slot < 0 or slot >= equipped_powers.size() or ability == null or ability not in power_library:
 		return false
@@ -71,9 +83,12 @@ func _try_cast_ability(ability: AbilityDefinition, origin: Vector2, aim_directio
 	var direction := aim_direction.normalized()
 	if direction == Vector2.ZERO:
 		direction = Vector2.DOWN
-	_cooldowns[ability.ability_id] = ability.cooldown / _weapon_attack_speed_multiplier
+	var cooldown_duration := ability.cooldown / maxf(0.01, _weapon_attack_speed_multiplier)
+	_cooldowns[ability.ability_id] = cooldown_duration
+	_cooldown_durations[ability.ability_id] = cooldown_duration
 	_spawn_effect(ability, origin, direction)
-	_damage_targets(ability, origin, direction)
+	if ability.power_kind == &"" and ability.ability_id not in ORIGINAL_POWER_IDS:
+		_damage_targets(ability, origin, direction)
 	ability_cast.emit(ability)
 	return true
 
@@ -86,19 +101,30 @@ func _spawn_effect(ability: AbilityDefinition, origin: Vector2, direction: Vecto
 	effect.global_position = origin + direction * ability.effect_distance
 	if effect.has_method("setup"):
 		effect.setup(ability, direction)
+	if ability.power_kind != &"":
+		var runtime := SuperpowerRuntime.new()
+		effect.add_child(runtime)
+		runtime.setup(ability, origin, direction, _effective_damage(ability))
+	elif ability.ability_id in ORIGINAL_POWER_IDS:
+		var runtime := OriginalPowerRuntime.new()
+		effect.add_child(runtime)
+		runtime.setup(ability, origin, direction, _effective_damage(ability), get_parent() as Node2D)
 
 func _damage_targets(ability: AbilityDefinition, origin: Vector2, direction: Vector2) -> void:
 	var minimum_dot := cos(deg_to_rad(ability.arc_degrees * 0.5))
 	var effective_range := maxf(1.0, ability.range + _weapon_range_bonus)
-	var game_state := get_node_or_null("/root/GameState")
-	var food_attack_bonus: float = game_state.get_food_buff_total(2) if game_state else 0.0
-	var effective_damage := maxi(0, roundi((ability.damage + _weapon_damage_bonus + food_attack_bonus) * _weapon_damage_multiplier))
+	var effective_damage := _effective_damage(ability)
 	for candidate in get_tree().get_nodes_in_group("mobs"):
 		if not is_instance_valid(candidate) or not candidate.has_method("take_damage"):
 			continue
 		var offset: Vector2 = candidate.global_position - origin
 		if offset.length() <= effective_range and (offset == Vector2.ZERO or direction.dot(offset.normalized()) >= minimum_dot):
 			candidate.take_damage(effective_damage)
+
+func _effective_damage(ability: AbilityDefinition) -> int:
+	var game_state := get_node_or_null("/root/GameState")
+	var food_attack_bonus: float = game_state.get_food_buff_total(2) if game_state else 0.0
+	return maxi(0, roundi((ability.damage + _weapon_damage_bonus + food_attack_bonus) * _weapon_damage_multiplier))
 
 func apply_weapon(weapon: WeaponDefinition) -> void:
 	if weapon == null:

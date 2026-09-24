@@ -5,10 +5,11 @@
 script = ExtResource("1")
 ability_id = &"arc_storm"
 display_name = "Arc Storm"
+description = "Shock a target in front of you, then jump to up to three nearby enemies. Each hop briefly interrupts movement and attacks."
+accent_color = Color(0.46, 0.82, 1, 1)
 effect_scene = ExtResource("2")
-damage = 22
+damage = 30
 range = 110.0
 arc_degrees = 72.0
-cooldown = 3.1
+cooldown = 4.2
 effect_distance = 48.0
-

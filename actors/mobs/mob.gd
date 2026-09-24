@@ -27,6 +27,7 @@ var _combat_target: Node2D = null
 var _attack_target: Node = null
 var _attack_damage_applied := false
 var _attack_cooldown_remaining := 0.0
+var _stasis_sources: Dictionary = {}
 
 func _ready() -> void:
 	add_to_group("mobs")
@@ -51,7 +52,12 @@ func _ready() -> void:
 	_ready_to_move = true
 
 func _physics_process(delta: float) -> void:
+	_update_stasis(delta)
 	if not _ready_to_move:
+		return
+	# Impact and death animations always finish, even during a stopped clock.
+	if is_in_stasis() and _action != &"hurt" and _action != &"death":
+		velocity = Vector2.ZERO
 		return
 	_attack_cooldown_remaining = maxf(0.0, _attack_cooldown_remaining - delta)
 	if _action_locked:
@@ -83,19 +89,49 @@ func take_damage(amount: int) -> void:
 	health_bar.set_health(health, definition.max_health)
 	health_changed.emit(health, definition.max_health)
 	if health == 0:
+		_stasis_sources.clear()
 		died.emit(self)
 		_play_locked_action(&"death")
 	else:
 		_play_locked_action(&"hurt")
 
 func perform_attack(target: Node = null) -> bool:
-	if health <= 0 or _action_locked or definition.attack_sheet == null:
+	if health <= 0 or is_in_stasis() or _action_locked or definition.attack_sheet == null:
 		return false
 	_attack_target = target
 	_attack_damage_applied = false
 	attack_started.emit(self)
 	_play_locked_action(&"attack")
 	return true
+
+func apply_stasis(source_id: int, duration: float) -> void:
+	if health <= 0 or duration <= 0.0:
+		return
+	_stasis_sources[source_id] = maxf(float(_stasis_sources.get(source_id, 0.0)), duration)
+	velocity = Vector2.ZERO
+
+func remove_stasis(source_id: int) -> void:
+	_stasis_sources.erase(source_id)
+
+func is_in_stasis() -> bool:
+	return health > 0 and not _stasis_sources.is_empty()
+
+func _update_stasis(delta: float) -> void:
+	for source_id in _stasis_sources.keys():
+		var remaining := float(_stasis_sources[source_id]) - delta
+		if remaining <= 0.0:
+			_stasis_sources.erase(source_id)
+		else:
+			_stasis_sources[source_id] = remaining
+
+func apply_gravity_pull(center: Vector2, strength: float, delta: float) -> void:
+	if health <= 0 or is_in_stasis():
+		return
+	var offset := center - global_position
+	if offset.length_squared() <= 0.01:
+		return
+	# CharacterBody movement keeps the pull on the safe side of walls and props.
+	move_and_collide(offset.normalized() * minf(offset.length(), maxf(0.0, strength * delta)))
 
 func _play_locked_action(action: StringName) -> void:
 	if _get_action_texture(action) == null:
@@ -118,7 +154,7 @@ func _finish_locked_action() -> void:
 	_set_action(&"idle", true)
 
 func _choose_wander_target() -> void:
-	if not _ready_to_move or _action_locked or navigation_agent.get_navigation_map().is_valid() == false:
+	if not _ready_to_move or is_in_stasis() or _action_locked or navigation_agent.get_navigation_map().is_valid() == false:
 		wander_timer.start(0.5)
 		return
 	for attempt in 12:

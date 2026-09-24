@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/effects/event_horizon.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+ability_id = &"event_horizon"
+display_name = "Event Horizon"
+description = "Tear open a singularity ahead of you. After a short charge, it pulls nearby enemies inward before collapsing in a violent blast. Aim toward a crowd."
+accent_color = Color(0.75, 0.45, 1, 1)
+power_kind = &"event_horizon"
+effect_scene = ExtResource("2")
+damage = 52
+range = 100.0
+arc_degrees = 360.0
+cooldown = 8.0
+effect_distance = 80.0
+charge_duration = 0.45
+sustain_duration = 1.4
+release_duration = 0.65

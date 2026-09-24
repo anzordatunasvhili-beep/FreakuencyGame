@@ -5,10 +5,11 @@
 script = ExtResource("1")
 ability_id = &"void_bloom"
 display_name = "Void Bloom"
+description = "Open a fan of seven void petals ahead of you. Three staggered waves damage enemies caught in the bloom."
+accent_color = Color(0.76, 0.4, 1, 1)
 effect_scene = ExtResource("2")
-damage = 34
+damage = 32
 range = 96.0
 arc_degrees = 130.0
 cooldown = 4.5
 effect_distance = 42.0
-

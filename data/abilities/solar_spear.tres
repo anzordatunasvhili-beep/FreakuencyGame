@@ -5,10 +5,11 @@
 script = ExtResource("1")
 ability_id = &"solar_spear"
 display_name = "Solar Spear"
+description = "Throw a traveling sunblade that pierces two enemies, then detonates at its tip. Line up a crowded path."
+accent_color = Color(1, 0.82, 0.35, 1)
 effect_scene = ExtResource("2")
 damage = 42
 range = 142.0
 arc_degrees = 38.0
 cooldown = 4.2
 effect_distance = 62.0
-

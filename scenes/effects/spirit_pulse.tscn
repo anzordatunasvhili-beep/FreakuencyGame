@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3]
 [ext_resource type="Script" path="res://combat/power_effect.gd" id="1"]
-[ext_resource type="Shader" path="res://assets/effects/shaders/void_bloom.gdshader" id="2"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/spirit_pulse.gdshader" id="2"]
 [node name="SpiritPulse" type="Node2D"]
 script = ExtResource("1")
 effect_shader = ExtResource("2")
 primary_color = Color(0.25, 1, 0.62, 1)
 secondary_color = Color(0.1, 0.2, 0.65, 1)
 particle_amount = 78
-duration = 0.75
+duration = 1.25
 particle_speed = 105.0
-visual_size = 104.0
-
+visual_size = 195.0
+directional = true

@@ -30,6 +30,13 @@ func _spawn_all() -> void:
 			add_child(mob)
 
 func _find_spawn_position(entry: MobSpawnEntry, rng: RandomNumberGenerator) -> Vector2:
+	# Buildings and tree trunks sit over navigable terrain, so test physical
+	# clearance as well as the atlas cell before accepting a spawn.
+	var clearance := CircleShape2D.new()
+	clearance.radius = 12.0
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = clearance
+	query.collision_mask = 1
 	for attempt in 64:
 		var angle := rng.randf_range(0.0, TAU)
 		var distance := rng.randi_range(
@@ -40,5 +47,9 @@ func _find_spawn_position(entry: MobSpawnEntry, rng: RandomNumberGenerator) -> V
 		var atlas_coordinates := ground.get_cell_atlas_coords(cell)
 		if atlas_coordinates == Vector2i(-1, -1) or atlas_coordinates in ProceduralWorld.WATER_TILES:
 			continue
-		return ground.to_global(ground.map_to_local(cell))
+		var position := ground.to_global(ground.map_to_local(cell))
+		query.transform = Transform2D(0.0, position)
+		if not get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty():
+			continue
+		return position
 	return Vector2.INF

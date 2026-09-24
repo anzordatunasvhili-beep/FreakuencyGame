@@ -7,8 +7,7 @@ effect_shader = ExtResource("2")
 primary_color = Color(0.25, 0.92, 1, 1)
 secondary_color = Color(0.55, 0.25, 1, 1)
 particle_amount = 58
-duration = 0.58
+duration = 1.15
 particle_speed = 130.0
-visual_size = 100.0
+visual_size = 170.0
 directional = true
-

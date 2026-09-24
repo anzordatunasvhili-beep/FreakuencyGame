@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://world/village_tree.gd" id="1_tree"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trunk"]
+radius = 7.0
+
+[node name="VillageTree" type="Node2D"]
+script = ExtResource("1_tree")
+
+[node name="TrunkBody" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrunkBody"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_trunk")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/effects/chronostasis.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+ability_id = &"chronostasis"
+display_name = "Chronostasis"
+description = "Fracture time around your cast position. Enemies caught in the field stop moving and attacking, then take damage when the suspended shards shatter. Cast when surrounded."
+accent_color = Color(0.35, 1, 0.82, 1)
+power_kind = &"chronostasis"
+effect_scene = ExtResource("2")
+damage = 38
+range = 110.0
+arc_degrees = 360.0
+cooldown = 9.0
+effect_distance = 0.0
+charge_duration = 0.35
+sustain_duration = 1.7
+release_duration = 0.65

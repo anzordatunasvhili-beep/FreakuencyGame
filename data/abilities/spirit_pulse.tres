@@ -5,10 +5,11 @@
 script = ExtResource("1")
 ability_id = &"spirit_pulse"
 display_name = "Spirit Pulse"
+description = "Release a forward healing crescent. Restore health immediately, then gain more health for enemies the wave strikes."
+accent_color = Color(0.43, 1, 0.73, 1)
 effect_scene = ExtResource("2")
-damage = 26
+damage = 24
 range = 102.0
 arc_degrees = 180.0
-cooldown = 3.0
+cooldown = 5.2
 effect_distance = 36.0
-

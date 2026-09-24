@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://sg24m0bdl74d"]
+[gd_scene load_steps=61 format=3 uid="uid://sg24m0bdl74d"]
 
 [ext_resource type="Script" uid="uid://dgljayp87um4i" path="res://Player/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://dlw5v7gm1lwhg" path="res://assets/characters/player/animpack.png" id="2_g2els"]
@@ -16,6 +16,10 @@
 [ext_resource type="Resource" path="res://data/abilities/glacial_halo.tres" id="14_power"]
 [ext_resource type="Resource" path="res://data/abilities/solar_spear.tres" id="15_power"]
 [ext_resource type="Resource" path="res://data/abilities/spirit_pulse.tres" id="16_power"]
+[ext_resource type="Resource" path="res://data/abilities/event_horizon.tres" id="17_power"]
+[ext_resource type="Resource" path="res://data/abilities/astral_lance.tres" id="18_power"]
+[ext_resource type="Resource" path="res://data/abilities/chronostasis.tres" id="19_power"]
+[ext_resource type="Script" path="res://ui/power_hud.gd" id="20_power_hud"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
 radius = 9.0
@@ -476,7 +480,7 @@ frame = 4
 [node name="AbilityController" type="Node" parent="."]
 script = ExtResource("3_ability")
 abilities = Array[Resource]([ExtResource("4_attack"), ExtResource("5_attack"), ExtResource("6_attack"), ExtResource("7_attack"), ExtResource("8_attack")])
-power_library = Array[Resource]([ExtResource("11_power"), ExtResource("12_power"), ExtResource("13_power"), ExtResource("14_power"), ExtResource("15_power"), ExtResource("16_power")])
+power_library = Array[Resource]([ExtResource("11_power"), ExtResource("12_power"), ExtResource("13_power"), ExtResource("14_power"), ExtResource("15_power"), ExtResource("16_power"), ExtResource("17_power"), ExtResource("18_power"), ExtResource("19_power")])
 equipped_powers = Array[Resource]([ExtResource("11_power"), ExtResource("12_power")])
 
 [node name="WeaponOrbit" type="Node2D" parent="." node_paths=PackedStringArray("ability_controller")]
@@ -488,3 +492,7 @@ ability_controller = NodePath("../AbilityController")
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponOrbit"]
 texture_filter = 1
 centered = true
+
+[node name="PowerHUD" type="CanvasLayer" parent="."]
+layer = 11
+script = ExtResource("20_power_hud")

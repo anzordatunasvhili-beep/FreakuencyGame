@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://combat/ability_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/effects/astral_lance.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+ability_id = &"astral_lance"
+display_name = "Astral Lance"
+description = "Focus a star into a piercing beam. A half-second aiming line warns of the discharge; every enemy along the beam is struck. Line up your shot before casting."
+accent_color = Color(0.35, 0.9, 1, 1)
+power_kind = &"astral_lance"
+effect_scene = ExtResource("2")
+damage = 46
+range = 240.0
+arc_degrees = 14.0
+cooldown = 5.5
+effect_distance = 0.0
+charge_duration = 0.5
+sustain_duration = 0.35
+release_duration = 0.55

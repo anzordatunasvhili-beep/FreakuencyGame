@@ -12,6 +12,12 @@ extends Node2D
 func _ready() -> void:
 	var world_seed := SeedManager.get_main_world_seed()
 	ProceduralWorld.generate_overworld(ground, details, world_seed, world_size)
+	var village_reserved := VillagePlacement.populate(ground, details, self, world_seed)
+	VillageTrees.scatter(ground, self, world_seed, village_reserved)
+	var water := WaterSurface.new()
+	water.name = "WaterSurface"
+	ground.add_child(water)
+	water.build_from_map(ground)
 	await get_tree().process_frame
 	var local_ok = SaveManager.load_local(0)
 	if not local_ok:
@@ -24,12 +30,12 @@ func _ready() -> void:
 		GameState.last_position = Vector2.ZERO
 	GameState.main_world_seed = world_seed
 
-	if player and GameState.last_position != Vector2.ZERO:
+	if player and GameState.last_position != Vector2.ZERO and not VillagePlacement.blocks_spawn(ground, self, GameState.last_position):
 		player.position = GameState.last_position
 	else:
 		player.position = ground.map_to_local(Vector2i.ZERO)
 
-	# Stable landmark placement can later be expanded into seeded building/NPC placement.
+	# The guide waits beside the open village square.
 	npc.position = ground.map_to_local(Vector2i(4, 0))
 
 func _unhandled_input(event: InputEvent) -> void:

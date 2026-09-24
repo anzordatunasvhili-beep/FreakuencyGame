@@ -5,10 +5,11 @@
 script = ExtResource("1")
 ability_id = &"ember_nova"
 display_name = "Ember Nova"
+description = "Ignite three expanding shockwaves. Enemies near the center are struck again as the outer rings catch up."
+accent_color = Color(1, 0.44, 0.12, 1)
 effect_scene = ExtResource("2")
-damage = 16
+damage = 28
 range = 76.0
 arc_degrees = 360.0
-cooldown = 2.4
+cooldown = 3.2
 effect_distance = 0.0
-

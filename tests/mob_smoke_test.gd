@@ -64,6 +64,14 @@ func _run() -> void:
 		if spawned_mob.definition.actor_id == &"orc_1":
 			orc = spawned_mob
 			break
+	if orc != null:
+		# Stop ambient combat before testing a deliberate attack animation.
+		orc.definition = orc.definition.duplicate()
+		orc.definition.hostile_to_player = false
+		for frame in 30:
+			if not orc._action_locked:
+				break
+			await physics_frame
 	if orc == null or not orc.perform_attack():
 		push_error("Mob smoke test: orc attack animation could not start.")
 		quit(1)
@@ -77,6 +85,7 @@ func _run() -> void:
 
 	var player := get_first_node_in_group("player") as Node2D
 	var game_state := root.get_node("GameState")
+	orc.definition.hostile_to_player = true
 	game_state.hp = game_state.max_hp
 	game_state.stats_changed.emit()
 	orc.global_position = player.global_position + Vector2(20, 0)
@@ -103,7 +112,7 @@ func _run() -> void:
 		push_error("Mob smoke test: player attack loadout did not initialize five attacks.")
 		quit(1)
 		return
-	if ability_controller.power_library.size() != 6 or ability_controller.equipped_powers.size() != 2:
+	if ability_controller.power_library.size() != 9 or ability_controller.equipped_powers.size() != 2:
 		push_error("Mob smoke test: power library or two-slot equipped loadout is invalid.")
 		quit(1)
 		return
@@ -188,12 +197,13 @@ func _run() -> void:
 		push_error("Mob smoke test: equipped power selection was not stored for saving.")
 		quit(1)
 		return
-	var power_list_ui := world.get_node("Inventory/PowerPanel/PowerList") as VBoxContainer
+	var power_list_ui := world.get_node("Inventory/PowerPanel/PowerScroll/PowerList") as VBoxContainer
 	if power_list_ui.get_child_count() != ability_controller.power_library.size():
 		push_error("Mob smoke test: inventory power loadout did not show every available power.")
 		quit(1)
 		return
 	orc.global_position = player.global_position + Vector2(400, 0)
+	ability_controller.equip_power(0, ability_controller.power_library[0])
 	if not ability_controller.try_cast_power(0, player.global_position, Vector2.RIGHT):
 		push_error("Mob smoke test: Ember Nova could not be cast.")
 		quit(1)

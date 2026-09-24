@@ -5,10 +5,11 @@
 script = ExtResource("1")
 ability_id = &"glacial_halo"
 display_name = "Glacial Halo"
+description = "Send out three crystal rings. Enemies caught on a ring's edge take damage and freeze briefly."
+accent_color = Color(0.45, 0.88, 1, 1)
 effect_scene = ExtResource("2")
-damage = 20
+damage = 22
 range = 88.0
 arc_degrees = 360.0
-cooldown = 3.6
+cooldown = 4.4
 effect_distance = 0.0
-
