@@ -1,22 +1,35 @@
-# Isometric village building kit
+# Isometric pixel houses
 
-`VillageBuilding` draws a timber-and-stone building from a `VillageBuildingRecipe`. Its local origin is the front tip of a roughly 128 × 54 pixel ground footprint. The building includes a `StaticBody2D` footprint for collisions. Place its origin on dry ground and draw it in the world's normal Y order.
+Eight generated transparent PNG sprites now replace the procedural/vector village houses.
 
-The five ready-made variants use `building.configure(style_id, seed)`, with IDs 0–4: cottage (gable), inn (cross-gable), shop (hip), tall house (gable), and hall (hip). The seed changes the small surface details without changing the composition.
+| ID | File | House |
+| --- | --- | --- |
+| 0 | pixel_houses/house_01.png | Cottage |
+| 1 | pixel_houses/house_02.png | Inn |
+| 2 | pixel_houses/house_03.png | Merchant shop |
+| 3 | pixel_houses/house_05.png | Village hall |
+| 4 | pixel_houses/house_06.png | Herbalist |
+| 5 | pixel_houses/house_07.png | Bakery |
+| 6 | pixel_houses/house_09.png | Merchant manor |
+| 7 | pixel_houses/house_10.png | Riverside cottage |
 
-For a new combination, create a `VillageBuildingRecipe`, set its exposed properties, then call `building.apply_recipe(recipe, seed)` before adding the building to the scene. Available parts are one to three stories; gable, hip, or cross-gable roof; cottage door, shop awning, or porch entry; zero to three dormers; optional chimney and balcony; and roof, plaster, timber, stone, and accent colors. For example:
+Instantiate `scenes/village_building.tscn` and set `house_index`, or call
+`configure(index)` on a new `VillageBuilding` before adding it to the scene.
+The node origin is the front of the ground footprint for Y sorting.
+`world/village_placement.gd` places all eight on dry sites around the plaza.
+Each instance has a physical footprint; saved positions and mob spawns avoid it.
 
-```gdscript
-var workshop := VillageBuildingRecipe.new()
-workshop.stories = 1
-workshop.roof_shape = VillageBuildingRecipe.RoofShape.CROSS_GABLE
-workshop.entry_style = VillageBuildingRecipe.EntryStyle.SHOP
-workshop.dormers = 0
-workshop.roof_color = Color("#557f90")
-var building := VillageBuilding.new()
-building.apply_recipe(workshop, 61)
-building.position = village_position
-add_child(building)
-```
+Original PNGs retain their generated alpha and resolution.
+`pixel_house.gdshader` samples a fixed world-pixel grid with nearest filtering
+and a crisp alpha cutoff, matching terrain pixel density at gameplay zoom.
+`ART_BOUNDS` and `WORLD_WIDTHS` in `world/village_building.gd` control framing
+and display size. These are complete house sprites, not recolorable roof/wall
+modules; the former `VillageBuildingRecipe` resource no longer drives their appearance.
 
-Run `godot --path . --rendering-method forward_plus --script tests/village_building_gallery_test.gd` to check all five presets and two custom combinations. It writes `tmp/village_building_gallery.png` when a graphics renderer is available.
+Generated with the built-in image_gen tool. The exact eight retained prompts are saved in
+`pixel_houses/generation_prompts.json`. They request isometric pixel art with
+teal shingle roofs, cream plaster, dark timber, stone bases and transparent backgrounds.
+
+Run `godot --path . --rendering-method forward_plus --script tests/village_building_gallery_test.gd`
+for all eight sprites (`tmp/pixel_houses_gallery.png`), or
+`tests/village_visual_test.gd` for in-game screenshots.

@@ -23,7 +23,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	rotation = lerp_angle(rotation, _target_angle, 1.0 - exp(-orbit_turn_speed * delta))
 	# Draw behind the player while aiming upward and in front while aiming down.
-	z_index = -1 if sin(rotation) < -0.15 else 2
+	# Stay in the actor's world depth so the sword also disappears behind trees.
+	z_index = 0
+	show_behind_parent = sin(rotation) < -0.15
 
 func set_aim_direction(direction: Vector2) -> void:
 	if direction != Vector2.ZERO:

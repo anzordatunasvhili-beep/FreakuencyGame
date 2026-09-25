@@ -14,12 +14,9 @@ const DIRT_TILES: Array[Vector2i] = [
 	Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)
 ]
 const GRASS_DETAILS: Array[Vector2i] = [
-	Vector2i(4, 2), Vector2i(5, 2), Vector2i(6, 2), Vector2i(7, 2),
-	Vector2i(8, 2), Vector2i(9, 2), Vector2i(10, 2), Vector2i(0, 3),
-	Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3)
+	Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4)
 ]
 const DIRT_DETAILS: Array[Vector2i] = [
-	Vector2i(6, 3), Vector2i(7, 3), Vector2i(8, 3), Vector2i(9, 3),
 	Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4)
 ]
 const WATER_DETAILS: Array[Vector2i] = [
@@ -70,9 +67,9 @@ static func _place_detail(detail_map: TileMapLayer, ground_tile: Vector2i, world
 		if roll < 2:
 			detail_map.set_cell(cell, SOURCE_ID, _pick_tile(WATER_DETAILS, world_seed + 5, cell), 0)
 	elif ground_tile in GRASS_TILES:
-		if roll < 13 and cell.length_squared() > 144:
+		if roll < 4 and cell.length_squared() > 144:
 			detail_map.set_cell(cell, SOURCE_ID, _pick_tile(GRASS_DETAILS, world_seed + 7, cell), 0)
-	elif roll < 7 and cell.length_squared() > 144:
+	elif roll < 2 and cell.length_squared() > 144:
 		detail_map.set_cell(cell, SOURCE_ID, _pick_tile(DIRT_DETAILS, world_seed + 11, cell), 0)
 
 static func _pick_tile(tiles: Array[Vector2i], world_seed: int, cell: Vector2i) -> Vector2i:

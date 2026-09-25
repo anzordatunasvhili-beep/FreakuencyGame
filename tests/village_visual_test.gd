@@ -27,7 +27,7 @@ func _run() -> void:
 		var tile := ground.local_to_map(ground.to_local(child.global_position))
 		assert(ground.get_cell_atlas_coords(tile) not in ProceduralWorld.WATER_TILES, "Building is on water")
 		assert(VillagePlacement.blocks_spawn(ground, world, child.position), "Building footprints must reject saved spawn positions")
-	assert(building_count == 5, "Expected all five modular building styles")
+	assert(building_count == 8, "Expected all eight pixel house sprites")
 	var first_tree := trees.get_child(0) as VillageTree
 	assert(VillagePlacement.blocks_spawn(ground, world, world.to_local(first_tree.global_position)), "Tree trunks must reject saved spawn positions")
 	assert(not VillagePlacement.blocks_spawn(ground, world, Vector2.ZERO), "Village center must remain a safe spawn")
@@ -41,7 +41,7 @@ func _run() -> void:
 	camera.zoom = Vector2(1.65, 1.65)
 	await create_timer(0.15).timeout
 	await _capture("village_overview")
-	print("Village visual test passed: %d modular buildings and %d scattered trees." % [building_count, trees.get_child_count()])
+	print("Village visual test passed: %d pixel houses and %d scattered trees." % [building_count, trees.get_child_count()])
 	quit(0)
 
 

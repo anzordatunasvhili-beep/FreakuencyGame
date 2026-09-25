@@ -74,10 +74,15 @@ flowing caustics, and foam that rolls along the mask's shoreline. Run
 `tests/water_visual_test.gd` in Godot to check the mask and capture two animation
 frames in `tmp`.
 
-The village uses reusable isometric building recipes and three seeded tree
-forms. See `assets/world/buildings/README.md` for the swappable roof, facade,
-entry, and color parts. `tests/village_building_gallery_test.gd` renders the
-building kit; `tests/village_visual_test.gd` captures the populated overworld.
+The village uses eight generated isometric pixel-art house sprites and three
+seeded tree forms. See `assets/world/buildings/README.md` for the house catalog,
+placement, and generation prompts. `tests/village_building_gallery_test.gd`
+renders all eight houses; `tests/village_visual_test.gd` captures the populated
+overworld.
+
+Four additional isometric pixel-tree sheets live in `assets/world/trees`.
+Each sheet contains four transparent plant sprites in a distinct visual family;
+its README documents the layout and generation prompts.
 
 Weapon art is grouped by type and pack. Runtime weapon stats live in
 `data/weapons`; every `WeaponDefinition` also has an ability list ready for future

@@ -33,7 +33,7 @@ static func scatter(ground: TileMapLayer, parent: Node2D, world_seed: int, block
 				continue
 			var tree := TREE_SCENE.instantiate() as VillageTree
 			tree.variation_seed = _hash(world_seed + 173, cell)
-			tree.form = tree.variation_seed % VillageTree.Form.size()
+			tree.variant = tree.variation_seed % VillageTree.VARIANT_COUNT
 			tree.crown_scale = 0.82 + float(tree.variation_seed % 9) * 0.045
 			grove.add_child(tree)
 			tree.position = grove.to_local(ground.to_global(ground.map_to_local(cell)))

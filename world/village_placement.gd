@@ -9,6 +9,9 @@ const BUILDING_ANCHORS: Array[Vector2] = [
 	Vector2(240.0, -85.0),
 	Vector2(-165.0, 125.0),
 	Vector2(165.0, 125.0),
+	Vector2(-430.0, -90.0),
+	Vector2(430.0, -90.0),
+	Vector2(0.0, 265.0),
 ]
 const PLAZA_RADIUS := Vector2(47.0, 29.0)
 const CLEARING_RADIUS := Vector2(289.0, 166.0)
@@ -19,7 +22,7 @@ const PEDESTRIAN_RADIUS := Vector2(122.0, 93.0)
 
 
 ## Carve dry, walkable ground before WaterSurface samples the atlas, then place
-## one example of every modular building style. Returns cells to keep free of
+## one example of every pixel house. Returns cells to keep free of
 ## scattered trees so roads, entrances, and the square stay open.
 static func populate(ground: TileMapLayer, details: TileMapLayer, parent: Node2D, world_seed: int) -> Dictionary:
 	var reserved: Dictionary = {}
@@ -71,12 +74,17 @@ static func populate(ground: TileMapLayer, details: TileMapLayer, parent: Node2D
 ## Existing saves may put the player inside a new footprint or tree trunk.
 ## Include the player's small collision radius.
 static func blocks_spawn(ground: TileMapLayer, parent: Node2D, local_position: Vector2) -> bool:
-	var collision_center := ground.to_local(parent.to_global(local_position + Vector2(0.0, -8.0)))
-	for desired_anchor in BUILDING_ANCHORS:
-		var anchor := ground.map_to_local(ground.local_to_map(desired_anchor))
-		var offset := collision_center - (anchor + Vector2(0.0, -27.0))
-		if absf(offset.x) / 72.0 + absf(offset.y) / 36.0 <= 1.0:
+	var collision_center := parent.to_global(local_position + Vector2(0.0, -8.0))
+	for child in parent.get_children():
+		if child is not VillageBuilding:
+			continue
+		var point: Vector2 = child.to_local(collision_center)
+		var polygon: PackedVector2Array = child.footprint_polygon()
+		if Geometry2D.is_point_in_polygon(point, polygon):
 			return true
+		for i in polygon.size():
+			if _distance_to_segment(point, polygon[i], polygon[(i + 1) % polygon.size()]) <= 9.0:
+				return true
 	var trees := parent.get_node_or_null("VillageTrees")
 	if trees != null:
 		var player_center := parent.to_global(local_position + Vector2(0.0, -8.0))

@@ -8,11 +8,12 @@ signal died(mob: Mob)
 
 @export var definition: MobDefinition
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var elevation_visuals: Node2D = $ElevationVisuals
+@onready var sprite: Sprite2D = $ElevationVisuals/Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var wander_timer: Timer = $WanderTimer
-@onready var health_bar: MobHealthBar = $HealthBar
+@onready var health_bar: MobHealthBar = $ElevationVisuals/HealthBar
 
 var health := 1
 var _home_position := Vector2.ZERO
@@ -28,9 +29,16 @@ var _attack_target: Node = null
 var _attack_damage_applied := false
 var _attack_cooldown_remaining := 0.0
 var _stasis_sources: Dictionary = {}
+var terrain_height := 0.0
+var _terrain_ground: TileMapLayer
+var _sprite_ground_offset := Vector2.ZERO
+var _health_bar_ground_offset := Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("mobs")
+	# Visuals share one logical foot anchor; collision stays on the surface.
+	y_sort_enabled = true
+	elevation_visuals.y_sort_enabled = false
 	if definition == null or _get_action_texture(&"walk") == null:
 		push_error("Mob requires a MobDefinition with a walk or default sprite sheet.")
 		set_physics_process(false)
@@ -44,6 +52,10 @@ func _ready() -> void:
 	sprite.region_enabled = true
 	sprite.scale = Vector2.ONE * definition.sprite_scale
 	sprite.position = definition.sprite_offset
+	_sprite_ground_offset = sprite.position
+	_health_bar_ground_offset = health_bar.position
+	health_bar.z_index = 0
+	_update_terrain_height()
 	_configure_collision()
 	_set_action(&"idle")
 	wander_timer.timeout.connect(_choose_wander_target)
@@ -52,6 +64,7 @@ func _ready() -> void:
 	_ready_to_move = true
 
 func _physics_process(delta: float) -> void:
+	_update_terrain_height()
 	_update_stasis(delta)
 	if not _ready_to_move:
 		return
@@ -80,7 +93,26 @@ func _physics_process(delta: float) -> void:
 	_last_direction = direction
 	_set_action(&"walk")
 	move_and_slide()
+	_update_terrain_height()
 	_update_animation(delta, true)
+
+func _update_terrain_height() -> void:
+	if not is_instance_valid(_terrain_ground):
+		var ancestor := get_parent()
+		while ancestor != null:
+			_terrain_ground = ancestor.get_node_or_null("Node2D/TileMapLayer") as TileMapLayer
+			if _terrain_ground != null:
+				break
+			ancestor = ancestor.get_parent()
+	if _terrain_ground == null or not _terrain_ground.has_meta("terrain_surface"):
+		terrain_height = 0.0
+	else:
+		var terrain = _terrain_ground.get_meta("terrain_surface")
+		terrain_height = terrain.get_height_at_surface(_terrain_ground.to_local(global_position)) if is_instance_valid(terrain) else 0.0
+	var elevation_offset := Vector2(0.0, terrain_height)
+	elevation_visuals.position = elevation_offset
+	sprite.position = _sprite_ground_offset - elevation_offset
+	health_bar.position = _health_bar_ground_offset - elevation_offset
 
 func take_damage(amount: int) -> void:
 	if amount <= 0 or health <= 0:
@@ -132,6 +164,7 @@ func apply_gravity_pull(center: Vector2, strength: float, delta: float) -> void:
 		return
 	# CharacterBody movement keeps the pull on the safe side of walls and props.
 	move_and_collide(offset.normalized() * minf(offset.length(), maxf(0.0, strength * delta)))
+	_update_terrain_height()
 
 func _play_locked_action(action: StringName) -> void:
 	if _get_action_texture(action) == null:
@@ -230,6 +263,7 @@ func _update_hostile_behavior(delta: float) -> bool:
 		_last_direction = direction
 		_set_action(&"run" if definition.run_sheet else &"walk")
 		move_and_slide()
+		_update_terrain_height()
 		_update_animation(delta, true)
 	return true
 

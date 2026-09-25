@@ -18,11 +18,14 @@ path_max_distance = 48.0
 avoidance_enabled = true
 radius = 10.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ElevationVisuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ElevationVisuals"]
 texture_filter = 1
 centered = true
 
 [node name="WanderTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="HealthBar" parent="." instance=ExtResource("2_health")]
+[node name="HealthBar" parent="ElevationVisuals" instance=ExtResource("2_health")]
+z_index = 0

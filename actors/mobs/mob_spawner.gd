@@ -47,7 +47,12 @@ func _find_spawn_position(entry: MobSpawnEntry, rng: RandomNumberGenerator) -> V
 		var atlas_coordinates := ground.get_cell_atlas_coords(cell)
 		if atlas_coordinates == Vector2i(-1, -1) or atlas_coordinates in ProceduralWorld.WATER_TILES:
 			continue
-		var position := ground.to_global(ground.map_to_local(cell))
+		var surface_position := ground.map_to_local(cell)
+		if ground.has_meta("terrain_surface"):
+			var terrain = ground.get_meta("terrain_surface")
+			if is_instance_valid(terrain):
+				surface_position = terrain.ground_to_surface(surface_position)
+		var position := ground.to_global(surface_position)
 		query.transform = Transform2D(0.0, position)
 		if not get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty():
 			continue

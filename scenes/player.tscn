@@ -444,19 +444,21 @@ script = ExtResource("1_3vyb7")
 agent = NodePath("NavigationAgent2D")
 anim_tree = NodePath("AnimationTree")
 ability_controller = NodePath("AbilityController")
-weapon_controller = NodePath("WeaponOrbit")
+weapon_controller = NodePath("ElevationVisuals/WeaponOrbit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_rkbax")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../ElevationVisuals")
 tree_root = SubResource("AnimationNodeStateMachine_x7c3f")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(-0.05549264, 0.8932384)
 parameters/Run/blend_position = Vector2(0.01245749, -0.003558755)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ElevationVisuals")
 libraries = {
 &"": SubResource("AnimationLibrary_qjkh3")
 }
@@ -469,7 +471,9 @@ debug_path_custom_color = Color(3.946722e-06, 0.789081, 0.51722604, 1)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ElevationVisuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ElevationVisuals"]
 texture_filter = 1
 position = Vector2(0, -8)
 texture = ExtResource("2_g2els")
@@ -483,13 +487,13 @@ abilities = Array[Resource]([ExtResource("4_attack"), ExtResource("5_attack"), E
 power_library = Array[Resource]([ExtResource("11_power"), ExtResource("12_power"), ExtResource("13_power"), ExtResource("14_power"), ExtResource("15_power"), ExtResource("16_power"), ExtResource("17_power"), ExtResource("18_power"), ExtResource("19_power")])
 equipped_powers = Array[Resource]([ExtResource("11_power"), ExtResource("12_power")])
 
-[node name="WeaponOrbit" type="Node2D" parent="." node_paths=PackedStringArray("ability_controller")]
+[node name="WeaponOrbit" type="Node2D" parent="ElevationVisuals" node_paths=PackedStringArray("ability_controller")]
 position = Vector2(0, -8)
 script = ExtResource("9_weapon_controller")
 starting_weapon = ExtResource("10_weapon")
-ability_controller = NodePath("../AbilityController")
+ability_controller = NodePath("../../AbilityController")
 
-[node name="WeaponSprite" type="Sprite2D" parent="WeaponOrbit"]
+[node name="WeaponSprite" type="Sprite2D" parent="ElevationVisuals/WeaponOrbit"]
 texture_filter = 1
 centered = true
 

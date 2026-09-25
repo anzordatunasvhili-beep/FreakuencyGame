@@ -1,0 +1,29 @@
+{
+  "generator": "Built-in image_gen tool",
+  "reference_order": [
+    "User reference 1: organic windswept and curled green tree concepts",
+    "User reference 2: lush healthy deciduous village tree",
+    "User reference 3: ancient horizontal deadwood with teal crowns",
+    "User reference 4: twisted scarlet-canopy tree"
+  ],
+  "shared_prompt": "Use case: stylized-concept.\nAsset type: transparent 2D isometric pixel-art game sprite sheet.\nInput images: The four user images are style references only. Use only the specified reference image for this sheet.\nPrimary request: Create exactly FOUR distinct standalone tree or plant sprites inspired by the specified reference style.\nStyle/medium: crisp hand-crafted pixel art matching a cozy fantasy isometric game; deliberate chunky pixel clusters, stepped edges, limited palette, readable silhouettes, no smooth vector art, no painterly blur, no antialiasing.\nComposition/framing: square canvas; four specimens arranged as an evenly spaced 2 by 2 collection; every plant fully visible and separated; no overlap; generous transparent space around each. True 2:1 dimetric/isometric game view with root bases aligned to the same ground-plane axes.\nLighting/mood: light from upper left; rich readable shadows.\nScene/backdrop: genuinely transparent alpha background.\nConstraints: exactly four specimens; each has a clear root/ground anchor; variations must differ in height, lean, canopy, and trunk shape; no rectangular ground tiles; tiny attached roots, moss, grass, stones, or flowers are allowed; no text, labels, borders, grid, people, buildings, logo, watermark, QR code, or cast shadow outside each root footprint. Aim for each individual plant to read cleanly at roughly 160 to 220 game pixels tall.",
+  "assets": [
+    {
+      "file": "tree_set_01_wild_green.png",
+      "style_prompt": "Reference focus: use Image 1 only. Four green fantasy trees based on its organic concept shapes: one windswept curved tree, one slender round-canopy tree, one curled hollow-trunk sapling, and one low ancient fallen-root tree with a living green crown. Deep forest greens and warm dark-brown wood."
+    },
+    {
+      "file": "tree_set_02_lush_village.png",
+      "style_prompt": "Reference focus: use Image 2 only. Four healthy lush deciduous village plants: one tall broad-canopy tree, one compact young tree, one branching orchard-like tree, and one dense flowering shrub/sapling. Layered fresh green foliage, dark emerald shadow clusters, sturdy brown trunks, a few subtle rocks or grass at roots."
+    },
+    {
+      "file": "tree_set_03_ancient_teal.png",
+      "style_prompt": "Reference focus: use Image 3 only. Four ancient enchanted teal woodland growths based on its massive horizontal deadwood and turquoise crowns: one arched fallen trunk with a small teal tree growing from it, one low bridge-like root mass with two crowns, one crooked stump with a luminous teal canopy, and one compact weathered snag with several teal saplings. Dark umber wood, muted turquoise foliage, tiny restrained cyan accents; no water platform and no character."
+    },
+    {
+      "file": "tree_set_04_crimson_twist.png",
+      "style_prompt": "Reference focus: use Image 4 only. Four dramatic twisted red-leaf fantasy plants based on its elegant black-brown trunk and scarlet canopy: one tall S-curved maple, one windswept flat-canopy tree, one compact forked red sapling, and one low curling root tree with crimson foliage. Palette of scarlet, coral, deep burgundy, charcoal-brown wood, with a few falling red leaves contained close to each silhouette. Do not reproduce any text or QR mark from the reference."
+    }
+  ]
+}
+

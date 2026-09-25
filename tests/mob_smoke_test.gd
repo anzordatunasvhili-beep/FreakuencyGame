@@ -141,7 +141,7 @@ func _run() -> void:
 		push_error("Mob smoke test: hotbar did not render item textures.")
 		quit(1)
 		return
-	var weapon_controller := player.get_node("WeaponOrbit") as WeaponController
+	var weapon_controller := player.get("weapon_controller") as WeaponController
 	if weapon_controller == null or weapon_controller.equipped_weapon == null or weapon_controller.weapon_sprite.texture == null:
 		push_error("Mob smoke test: the equipped sword or its orbit visual did not initialize.")
 		quit(1)
